@@ -1,0 +1,95 @@
+{% extends 'basic.html' %}
+
+{% block content %}
+<div class="container py-3 bg-dark" style="border-radius:50px;" >
+    <div class="row d-flex justify-content-center">
+        <div class="card">
+            <div class="card-body">
+                <h4>All {{category}} Doctors </h4>
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class='col-sm-12'>
+            {% for i in doctor %}
+                <div id="accordion" class='p-3 bg-dark'>
+                    
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <div class="mb-0 d-flex justify-content-between">
+                                    <h3>{{i.name}}</h3>
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="#{{i.id}}" aria-expanded="true" aria-controls="collapseOne">
+                                    <h3>+ </h3>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div id="{{i.id}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body">
+                                    <div class="row d-flex justify-content-center">
+                                        <div class="col-sm-5 border-right">
+                                            <h5>{{i.address}}</h5>
+                                        </div>
+                                        <div class="col-sm-5 ml-2">
+                                            <div class="row d-flex justify-content-center flex-column">
+                                               <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">Book An Appointment</button>
+                                                <a href="" class="btn btn-primary mt-3"> Call the doctor? </a>
+                                            
+                                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLongTitle">Book An Appointment With Dr. {{i.name}}</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col-sm-10">
+                                                                    <form method="post" action="{% url 'newAppointment' i.id %}"> {% csrf_token %}
+                                                                            <input type="date" class='form-control' name="dateselect">
+                                                                            <button class="btn btn-primary" type="submit">Submit</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="button" class="btn btn-primary">Submit </button>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="row border-top">
+                                        <div class="col-sm-12 d-flex justify-content-center">
+                                            <div id='{{i.id}}map' style='width: 100%; height: 500px;'></div>
+                                        </div>
+                                        <script>
+                                            mapboxgl.accessToken = 'pk.eyJ1IjoiaW1sb3JkaW1wYWxlciIsImEiOiJja3Fhbm1pcnkwYWhpMnBrZGFraHc3NTRlIn0.YuUk6OD-kfnZqdCLrf2SVg';
+                                            var map = new mapboxgl.Map({
+                                            container: '{{i.id}}map',
+                                            style: 'mapbox://styles/mapbox/streets-v10',
+                                            center: [{{i.long}}, {{i.lat}}],
+                                            zoom: 11,
+                                            bearing: 180
+                                            });
+                                            var marker = new mapboxgl.Marker()
+                                            .setLngLat([{{i.long}},{{i.lat}}])
+                                            .addTo(map);
+                                        </script>
+                                    </div>    
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

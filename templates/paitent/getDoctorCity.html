@@ -1,0 +1,54 @@
+{% extends 'basic.html' %}
+
+{% block content %}
+     
+    <div class="container-fluid bg-light my-3 py-5" style="border-radius:50px;">
+        <div class="container">
+            <div class="jumbotron jumbotron-fluid" style="background: #A4A7AB; border-radius:50px; ">
+            <div class="container">
+                <h1 class="display-4">Select City</h1>
+                <form class="form-horizontal" method="POST" action=""> {% csrf_token %}
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect01">Choose Your City</label>
+                        </div>
+                        <select class="custom-select" name="select" id="inputGroupSelect01">
+                            <option selected>Choose...</option>
+                            {% for key,value in cities %}
+                            <option value={{key}}>{{value}}</option>
+                            {% endfor %}
+                        </select>
+                        <button type="submit" class="btn btn-primary">Submit </button> 
+                    </div>
+                </form>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="container mt-4 bg-light m-3 py-4" style="border-radius:50px;">
+            {% if request.method == 'POST' %}
+            <div class='row'>
+                {% if Doc %}
+                    {% for i in Doc %}
+                        <div class='col-sm-4'>
+                            <div class="card" style="width: 100%; background:grey;">
+                               <div class="card-body">
+                                    <h5 class="card-title">{{i.name}}</h5>
+                                    <p class="card-text">{{i.category.name}}</p>
+                                    <div class='d-flex justify-content-around'>
+                                        <a href="#" class="btn btn-danger">Call?</a>
+                                        <a href="#" class="btn btn-success">Book An Appointment?</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <h1>No Doctors </h1>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}

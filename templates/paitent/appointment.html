@@ -1,0 +1,35 @@
+<div class="container-fluid bg-light" style="border-radius:50px;">
+    <div class="row mt-3  d-flex justify-content-around" >
+    
+        <div class="col-md-5  my-3">
+            <div id="accordion" class='p-3 bg-dark'>
+            
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <div class="mb-0 d-flex justify-content-between">
+                            <h3>Appointments By Month</h3>
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <h3>+ </h3>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="col-sm-5 my-5 " >
+            <div class="table-responsive d-flex flex-column border p-3 " style="border-radius:50px; background: #A4A7AB;"> 
+                <a href="{% url 'getDoctorCategory' %}" class="btn btn-block btn-primary my-md-4"><h5>Search Doctors By Category</h5></a>
+                <a href="" class="btn btn-block btn-warning my-md-4"><h5>Need any medicines?</h5></a>
+                <a href="" class="btn btn-block btn-danger my-md-4"><h5>Need a Hospital Bed?</h5></a>
+            </div>
+        </div>
+    </div>
+   
+</div>

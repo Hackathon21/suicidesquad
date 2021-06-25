@@ -1,0 +1,28 @@
+{% extends 'basic.html' %}
+
+{% block content %}
+<div class="container py-3 bg-dark" style="border-radius:50px;">
+    <div class="row d-flex justify-content-center my-3">
+        <div class="card">
+            <div class="card-header">
+                <h4> All Categories </h4>
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center ">
+    {% for i in category %}
+        <div class="col-md-4 col-sm-12 ">
+            <a href="{% url 'allDoctor' i.id %}" style="text-decoration:none;"><div class="card mb-sm-3" style="width: 18rem;">
+                <img class="card-img-top" src="https://media.istockphoto.com/photos/heart-attact-or-broken-heart-concept-cute-read-heart-break-with-on-picture-id1038526140?k=6&m=1038526140&s=612x612&w=0&h=seh6FQ6FT8S3PAAo8Aq0CCrJKArTlMjHsAA6oqX0CXQ=" alt="Card image cap">
+                <div class="card-body border-top">
+                    <h5 class="card-title">{{i.name}}</h5>
+                     
+                </div>
+            </div></a>
+        </div>
+    {% endfor %}
+      
+    </div>
+</div>
+{% endblock content %}
+
