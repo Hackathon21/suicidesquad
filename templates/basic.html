@@ -1,27 +1,313 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-  {% load static %}
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+   
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet"/>
+    <!-- Twitter -->
+    <!-- <meta name="twitter:site" content="@bootstrapdash">
+    <meta name="twitter:creator" content="@bootstrapdash">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Azia">
+    <meta name="twitter:description" content="Responsive Bootstrap 4 Dashboard Template">
+    <meta name="twitter:image" content="https://www.bootstrapdash.com/azia/img/azia-social.png"> -->
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Facebook -->
+    <!-- <meta property="og:url" content="https://www.bootstrapdash.com/azia">
+    <meta property="og:title" content="Azia">
+    <meta property="og:description" content="Responsive Bootstrap 4 Dashboard Template">
 
-    <title>Hello, world!</title>
-    <script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
-<link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
-<link href='{% static 'css/style.css' %}' type='text/css' />
-      {% include 'header.html' %}
+    <meta property="og:image" content="https://www.bootstrapdash.com/azia/img/azia-social.png">
+    <meta property="og:image:secure_url" content="https://www.bootstrapdash.com/azia/img/azia-social.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="600"> -->
+
+    <!-- Meta -->
+    <meta name="description" content="Responsive Bootstrap 4 Dashboard Template">
+    <meta name="author" content="BootstrapDash">
+  {% load static %}
+    <title>Hospital CRM</title>
+
+    <!-- vendor css -->
+    <link href="{% static 'lib/fontawesome-free/css/all.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/ionicons/css/ionicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/typicons.font/typicons.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/flag-icon-css/css/flag-icon.min.css' %}" rel="stylesheet">
+
+    <!-- azia CSS -->
+    <link rel="stylesheet" href="{% static 'css/azia.css' %}">
+
   </head>
-  <body class='bg-primary'>
-    {% block content %}{% endblock content %}
+  <body>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <div class="az-header">
+      <div class="container">
+        <div class="az-header-left">
+          <a href="{% url 'index' %}" class="az-logo"><span></span> Name.</a>
+          <a href="" id="azMenuShow" class="az-header-menu-icon d-lg-none"><span></span></a>
+        </div><!-- az-header-left -->
+        <div class="az-header-menu">
+          <div class="az-header-menu-header">
+            <a href="index.html" class="az-logo"><span></span> azia</a>
+            <a href="" class="close">&times;</a>
+          </div><!-- az-header-menu-header -->
+          <ul class="nav">
+            <li class="nav-item  ">
+              <a href="{% url 'index' %}" class="nav-link"><i class="typcn typcn-chart-area-outline"></i> Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'appointments' %}" class="nav-link "><i class="typcn typcn-document"></i> Doctor</a>
+              
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'inventory' %}" class="nav-link "><i class="typcn typcn-chart-bar-outline"></i> Inventory</a>
+              
+            </li>
+            
+            <li class="nav-item">
+              <a href="{% url 'diagnoists' %}" class="nav-link "><i class="typcn typcn-book"></i> Diagnosis</a>
+              
+            </li>
+          </ul>
+        </div><!-- az-header-menu -->
+        <div class="az-header-right">
+        
+          {% if user.is_authenticated %}
+           <a href="{% url 'logoutPage' %}" class='btn btn-sm btn-danger'> Logout </a>
+          {% else %}
+           <a href="{% url 'loginPage' %}" class='btn btn-sm btn-az-primary'> Login </a>
+          {% endif %}
+         
+        </div><!-- az-header-right -->
+      </div><!-- container -->
+    </div>
+<div class="az-content az-content-dashboard" style="background:#E4E5E7;">
+      <div class="container">
+        <div class="az-content-body" >
+          
+       
+    {% block content %}{% endblock content %}
+ </div><!-- az-content-body -->
+      </div>
+    </div><!-- az-content -->
+     <div class="az-footer ht-40">
+      <div class="container ht-100p pd-t-0-f">
+        <span class="text-muted d-block text-center text-sm-left d-sm-inline-block"> ©No Copyright  </span>
+        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> By Suicide Squad</span>
+      </div><!-- container -->
+    </div><!-- az-footer -->
+
+<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+    <script src="{% static 'lib/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'lib/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'lib/ionicons/ionicons.js' %}"></script>
+    <script src="{% static 'lib/jquery.flot/jquery.flot.js' %}"></script>
+    <script src="{% static 'lib/jquery.flot/jquery.flot.resize.js' %}"></script>
+    <script src="{% static 'lib/chart.js/Chart.bundle.min.js' %}"></script>
+    <script src="{% static 'lib/peity/jquery.peity.min.js' %}"></script>
+
+    <script src="{% static 'js/azia.js' %}"></script>
+    <script src="{% static 'js/chart.flot.sampledata.js' %}"></script>
+    <script src="{% static 'js/dashboard.sampledata.js' %}"></script>
+    <script src="{% static 'js/jquery.cookie.js' %}" type="text/javascript"></script>
+    <script>
+      $(function(){
+        'use strict'
+
+    		var plot = $.plot('#flotChart', [{
+          data: flotSampleData3,
+          color: '#007bff',
+          lines: {
+            fillColor: { colors: [{ opacity: 0 }, { opacity: 0.2 }]}
+          }
+        },{
+          data: flotSampleData4,
+          color: '#560bd0',
+          lines: {
+            fillColor: { colors: [{ opacity: 0 }, { opacity: 0.2 }]}
+          }
+        }], {
+    			series: {
+    				shadowSize: 0,
+            lines: {
+              show: true,
+              lineWidth: 2,
+              fill: true
+            }
+    			},
+          grid: {
+            borderWidth: 0,
+            labelMargin: 8
+          },
+    			yaxis: {
+            show: true,
+    				min: 0,
+    				max: 100,
+            ticks: [[0,''],[20,'20K'],[40,'40K'],[60,'60K'],[80,'80K']],
+            tickColor: '#eee'
+    			},
+    			xaxis: {
+            show: true,
+            color: '#fff',
+            ticks: [[25,'OCT 21'],[75,'OCT 22'],[100,'OCT 23'],[125,'OCT 24']],
+          }
+        });
+
+        $.plot('#flotChart1', [{
+          data: dashData2,
+          color: '#00cccc'
+        }], {
+    			series: {
+    				shadowSize: 0,
+            lines: {
+              show: true,
+              lineWidth: 2,
+              fill: true,
+              fillColor: { colors: [ { opacity: 0.2 }, { opacity: 0.2 } ] }
+            }
+    			},
+          grid: {
+            borderWidth: 0,
+            labelMargin: 0
+          },
+    			yaxis: {
+            show: false,
+            min: 0,
+            max: 35
+          },
+    			xaxis: {
+            show: false,
+            max: 50
+          }
+    		});
+
+        $.plot('#flotChart2', [{
+          data: dashData2,
+          color: '#007bff'
+        }], {
+    			series: {
+    				shadowSize: 0,
+            bars: {
+              show: true,
+              lineWidth: 0,
+              fill: 1,
+              barWidth: .5
+            }
+    			},
+          grid: {
+            borderWidth: 0,
+            labelMargin: 0
+          },
+    			yaxis: {
+            show: false,
+            min: 0,
+            max: 35
+          },
+    			xaxis: {
+            show: false,
+            max: 20
+          }
+    		});
+
+
+        //-------------------------------------------------------------//
+
+
+        // Line chart
+        $('.peity-line').peity('line');
+
+        // Bar charts
+        $('.peity-bar').peity('bar');
+
+        // Bar charts
+        $('.peity-donut').peity('donut');
+
+        var ctx5 = document.getElementById('chartBar5').getContext('2d');
+        new Chart(ctx5, {
+          type: 'bar',
+          data: {
+            labels: [0,1,2,3,4,5,6,7],
+            datasets: [{
+              data: [2, 4, 10, 20, 45, 40, 35, 18],
+              backgroundColor: '#560bd0'
+            }, {
+              data: [3, 6, 15, 35, 50, 45, 35, 25],
+              backgroundColor: '#cad0e8'
+            }]
+          },
+          options: {
+            maintainAspectRatio: false,
+            tooltips: {
+              enabled: false
+            },
+            legend: {
+              display: false,
+                labels: {
+                  display: false
+                }
+            },
+            scales: {
+              yAxes: [{
+                display: false,
+                ticks: {
+                  beginAtZero:true,
+                  fontSize: 11,
+                  max: 80
+                }
+              }],
+              xAxes: [{
+                barPercentage: 0.6,
+                gridLines: {
+                  color: 'rgba(0,0,0,0.08)'
+                },
+                ticks: {
+                  beginAtZero:true,
+                  fontSize: 11,
+                  display: false
+                }
+              }]
+            }
+          }
+        });
+
+        // Donut Chart
+        var datapie = {
+          labels: ['Search', 'Email', 'Referral', 'Social', 'Other'],
+          datasets: [{
+            data: [25,20,30,15,10],
+            backgroundColor: ['#6f42c1', '#007bff','#17a2b8','#00cccc','#adb2bd']
+          }]
+        };
+
+        var optionpie = {
+          maintainAspectRatio: false,
+          responsive: true,
+          legend: {
+            display: false,
+          },
+          animation: {
+            animateScale: true,
+            animateRotate: true
+          }
+        };
+
+        // For a doughnut chart
+        var ctxpie= document.getElementById('chartDonut');
+        var myPieChart6 = new Chart(ctxpie, {
+          type: 'doughnut',
+          data: datapie,
+          options: optionpie
+        });
+
+      });
+    </script>
   </body>
 </html>

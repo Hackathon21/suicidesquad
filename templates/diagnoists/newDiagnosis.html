@@ -1,0 +1,81 @@
+{% extends "basic.html" %}
+
+{% block content %}
+        <div class="row row-sm mg-b-20 d-flex justify-content-center my-5">
+            <div class="col-lg-7 ht-lg-100p">
+              <div class="card card-dashboard-one">
+                <div class="card-header">
+                  <div>
+                    <h2 class="">Create New Diagnoist</h2>
+                    <p class="card-text">Idhar bhi ek subtitle batao</p>
+                  </div>
+                  
+                </div><!-- card-header -->
+                <div class="card-body px-3">
+                    <form  method="post" action="{% url 'newDiagnosis' %}"> {% csrf_token %}
+                        <div class="form-group">
+                            <div class="row">
+                                <div class=" col-sm-12">
+                                        <label>Diagnosis Name:</label>
+                                         <input type="text" class="form-control" name='name'  placeholder="Enter Diagnosis Name" >
+                       
+                                </div>
+                                
+                            </div>
+                        </div><!-- form-group -->
+                        <div class="form-group">
+                            <div class="row">
+                                <div class=" col-sm-12">
+                                        <label>Price:</label>
+                                         <input type="text" class="form-control" name='price'  placeholder="Enter Diagnosis Price" >
+                       
+                                </div>
+                                
+                            </div>
+                        </div><!-- form-group -->
+                       
+                        
+                        <!-- form-group -->
+                        <button class="btn btn-danger btn-block" type="submit">Create New Diagnosis</button>
+                    </form>
+                  
+                  <!-- flot-chart-wrapper -->
+                </div><!-- card-body -->
+              </div><!-- card -->
+            </div><!-- col -->
+            <!--col -->
+        </div>
+        <hr>
+        <div class="container">
+            <h2 class="">All Diagnosis</h2>
+        </div>
+            <div class="table-responsive">
+                <table class="table table-hover table-dark mg-b-0">
+                <thead>
+                    <tr>
+                    <th><h4 class='text-light mt-1'>ID</h4></th>
+                    <th><h4 class='text-light mt-1'>Name</h4></th>
+                    <th><h4 class='text-light mt-1'> Price</h4></th>
+                    
+                    <th><h4 class='text-light mt-1'>Update</h4></th>
+                    <th><h4 class='text-light mt-1'>Delete</h4></th>
+                    </tr>
+                </thead>
+                <tbody>
+                 {% for i in diagnosis %}
+                    <tr>
+                        <th scope="row"><h4 class='text-white'>{{ forloop.counter }}</h4></th>
+                        <td class='text-light mt-1'><h4>{{i.name}}</h5></td>
+                        <td class='text-light mt-1'><h4>₹{{i.price}}/-</h5></td>
+                        
+                            
+                        
+                         <td class='text-light mt-1'><a href="" class='btn btn-sm btn-az-primary'>Update </a></td>
+                        <td class='text-light mt-1'><a href="" class='btn btn-sm btn-danger'>Delete </a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                </table>
+            </div>
+        
+{% endblock content %}

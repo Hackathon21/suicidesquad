@@ -1,0 +1,84 @@
+{% extends "basic.html" %}
+
+{% block content %}
+        <div class="row row-sm mg-b-20 d-flex justify-content-center my-5">
+            <div class="col-lg-7 ht-lg-100p">
+              <div class="card card-dashboard-one">
+                <div class="card-header">
+                  <div>
+                    <h2 class="">Create New User</h2>
+                    <p class="card-text">Audience to which the users belonged while on the current date range.</p>
+                  </div>
+                  
+                </div><!-- card-header -->
+                <div class="card-body px-3">
+                    <form  method="post" action="{% url 'inventoryUser' %}"> {% csrf_token %}
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                        <label>Name</label>
+                                         <input type="text" class="form-control" name='name'  placeholder="Enter paitent's Name" >
+                       
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                        <label>Phone</label>
+                                         <input type="number" class="form-control" name='phone'  placeholder="Enter Paitent's Phone No." >
+                       
+                                </div>
+                            </div>
+                        </div><!-- form-group -->
+                        
+                        
+                        <!-- form-group -->
+                        <button class="btn btn-az-primary btn-block" type="submit" name="btn1">Add Meds Now?</button>
+                    </form>
+                  
+                  <!-- flot-chart-wrapper -->
+                </div><!-- card-body -->
+              </div><!-- card -->
+            </div><!-- col -->
+            <!--col -->
+        </div>
+        <hr>
+         <div class="col-lg-12 col-xl-12 mg-t-20 mg-lg-t-0">
+              <div class="card card-table-one">
+                <div class="d-flex justify-content-between">
+                    <h3 >Drugs List</h3>
+                    <a href="" class='btn btn-sm btn-az-primary'>All Drugs </a>
+                </div> 
+                <p class="az-content-text mg-b-20">Part of this date range occurs before the new users metric had been calculated, so the old users metric is displayed.</p>
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                    <tr>
+                    <th><h4 class='text-dark mt-1'>ID</h4></th>
+                    <th><h4 class='text-dark mt-1'>Name</h4></th>
+                    <th><h4 class='text-dark mt-1'>Buy Price</h4></th>
+                    <th><h4 class='text-dark mt-1'>Selling Price</h4></th>
+                    <th><h4 class='text-dark mt-1'>Margin</h4></th>
+                    <th><h4 class='text-dark mt-1'>Update</h4></th>
+                    
+                    </tr>
+                </thead>
+                <tbody>
+                 {% for i in meds %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td class=' mt-1'>{{i.item}}</td>
+                        <td class=' mt-1'>₹{{i.b_price}}/-</td>
+                        <td class=' mt-1'>₹{{i.s_price}}/-</td>
+                        <td class=' mt-1'> ₹{{i.get_margin}}/-</td>
+                        <td class=' mt-1 d-flex justify-content-center'>
+                            <a href="" class='btn btn-sm btn-az-primary'>Update <a href="" class='nav-link'>+</a></a>
+                        </td>
+                        
+                    </tr>
+                {% endfor %}
+                </tbody>
+                  </table>
+                </div><!-- table-responsive -->
+              </div><!-- card -->
+            </div>
+        
+        
+{% endblock content %}

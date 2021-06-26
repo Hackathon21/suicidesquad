@@ -1,0 +1,50 @@
+{% extends "basic.html" %}
+
+{% block content %}
+    <div class="container">
+        <h2>All Items</h2>
+    </div>
+    
+        <div class="row row-sm my-3 ml-3">
+            <div class="col-sm-3 ">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for...">
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
+                </span>
+              </div><!-- input-group -->
+            </div>
+        </div>
+    <div class="container-fluid ">
+        <div class="table-responsive">
+                <table class="table table-hover table-dark mg-b-0">
+                <thead>
+                    <tr>
+                    <th><h4 class='text-light mt-1'>ID</h4></th>
+                    <th><h4 class='text-light mt-1'>Name</h4></th>
+                    <th><h4 class='text-light mt-1'>Buy Price</h4></th>
+                    <th><h4 class='text-light mt-1'>Selling Price</h4></th>
+                    <th><h4 class='text-light mt-1'>Margin</h4></th>
+                    <th><h4 class='text-light mt-1'>Update</h4></th>
+                    <th><h4 class='text-light mt-1'>Delete</h4></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for i in meds %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td class='text-light mt-1'>{{i.item}}</td>
+                        <td class='text-light mt-1'>₹{{i.b_price}}/-</td>
+                        <td class='text-light mt-1'>₹{{i.s_price}}/-</td>
+                        <td class='text-light mt-1'> ₹{{i.get_margin}}/-</td>
+                        <td class='text-light mt-1'>
+                            <a href="" class='btn btn-sm btn-az-primary'>Update </a>
+                        </td>
+                        <td class='text-light mt-1'><a href="" class='btn btn-sm btn-danger'>Delete </a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                </table>
+            </div>
+    </div>
+{% endblock content %}

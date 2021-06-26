@@ -1,18 +1,27 @@
-from django.urls import path , include
+from django.urls import path,  include
 from . import views
-
 urlpatterns = [
-    
-    path('' ,views.home , name='home'),
-    path('getDoctorCity' , views.getDoctorCity , name='getDoctorCity'),
-    path('getDoctorCategory' , views.getDoctorCategory , name='getDoctorCategory'),
-    path('allDoctor/<str:pk>/' , views.allDoctor , name='allDoctor'),
+    path('' , views.index , name='index'),
 
+    #Appointments
+    path('appointments' , views.appointments , name='appointments'),
+    path('newAppointment' , views.newAppointment , name='newAppointment'),
+
+    #inventory
+    path('inventory' , views.inventory , name='inventory'),
+    path('allItems' , views.allItems , name='allItems'),
+    path('newItem' , views.newItem , name='newItem'),
+    path('inventoryUser' , views.inventoryUser , name='inventoryUser'),
+
+    
+    path(r'^inventoryBill/(?P<pk>\w+)/$' , views.inventoryBill , name='inventoryBill'),
+    path(r'^inventoryBill/(?P<pk>\w+)/(?P<ls>\w+)/$' , views.inventoryBill2 , name='inventoryBill2'),
+
+    #diagnoists
+    path('diagnoists' , views.diagnoists , name='diagnoists'),
+    path('newDiagnosis', views.newDiagnosis , name='newDiagnosis'),
 
     #auth
-    path('login' , views.loginPage , name='loginPage'),
-    path('logout' , views.logoutPage , name='logoutPage'),
-
-    #appointment
-    path('newAppointment/<str:pk>/' , views.newAppointment , name='newAppointment'),
+    path('loginPage' , views.loginPage , name='loginPage'),
+    path('logoutPage' , views.logoutPage , name='logoutPage')
 ]

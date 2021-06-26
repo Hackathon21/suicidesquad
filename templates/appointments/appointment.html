@@ -1,0 +1,85 @@
+{% extends "basic.html" %}
+
+{% block content %}
+        <div class="row row-sm mb-5 mt-4">
+            <div class="col-lg-7 ht-lg-100p">
+              <div class="card card-dashboard-one">
+                <div class="card-header">
+                  <div>
+                    <h2 >Doctor's Dashboard</h2>
+                    <p class="card-text">Create new doctor or list all doctors in your hospital</p>
+                  </div>
+                  <div class="">
+                    <button class="btn btn-az-primary">View All Doctors</button>
+                    
+                  </div>
+                  
+                </div><!-- card-header -->
+                <div class="card-body">
+                  <div class="d-flex justify-content-around">
+                    <div class='bg-primary p-3 text-light' style="border-radius:50px;" >
+                      <label class="mg-b-0">Doctors</label>
+                      <h2>13,956</h2>
+                    </div>
+                    <div class='bg-success p-3 text-light' style="border-radius:50px;">
+                      <label class="mg-b-0">Appointments Today</label>
+                      <h2>33.50%</h2>
+                    </div>
+                    <div class='bg-danger p-3 text-light' style="border-radius:50px;">
+                      <label class="mg-b-0">Paitents</label>
+                      <h2>83,123</h2>
+                    </div>
+                  </div><!-- card-body-top -->
+                  <!-- flot-chart-wrapper -->
+                </div><!-- card-body -->
+              </div><!-- card -->
+            </div><!-- col -->
+            <div class="col-lg-5 mg-t-20 mg-lg-t-0">
+              <div class="row ">
+                <div class="col-sm-12 d-flex flex-column justify-content-center">
+                   <a href="" class='btn btn-az-secondary btn-lg'>New Doctor? </a>
+                      
+                </div>
+                
+                
+              </div><!-- row -->
+            </div><!--col -->
+          </div>
+          <hr>
+          <div class="container">
+            <h2>Appointments Today </h2>
+          </div>
+          <div class="table-responsive mt-5">
+                <table class="table table-hover table-dark mg-b-0">
+                <thead>
+                    <tr>
+                    <th><h4 class='text-light mt-1'>ID</h4></th>
+                    <th><h4 class='text-light mt-1'>Name</h4></th>
+                    <th><h4 class='text-light mt-1'>Doctor</h4></th>
+                    <th><h4 class='text-light mt-1'>Time</h4></th>
+                    <th><h4 class='text-light mt-1'>Action</h4></th>
+                    <th>*</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for i in appointment %}
+                    <tr>
+                        <th scope="row">1</th>
+                        <td class='text-light mt-1'>{{i.pai.name}}</td>
+                        <td class='text-light mt-1'>{{i.doc.name}}</td>
+                        <td class='text-light mt-1'> {{i.date}} {{i.time}}</td>
+                        <td class='text-light mt-1'>
+                            <div class="row ">
+                                <div class="col-sm-12 col-md-6 ">
+                                    <a href="" class='btn btn-sm btn-az-primary'>Bill </a>
+                                </div>
+                                
+                            </div>
+                        </td>
+                        <td class='text-light mt-1'> X</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                </table>
+            </div>
+{% endblock content %}

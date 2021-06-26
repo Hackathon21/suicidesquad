@@ -1,0 +1,108 @@
+{% extends "basic.html" %}
+
+{% block content %}
+        <div class="az-dashboard-one-title">  
+            <div>
+              <h2 class="az-dashboard-title">Hi, welcome back!</h2>
+              <p class="az-dashboard-text">Time</p>
+            </div>
+            <div class="az-content-header-right">
+              <div class="media">
+                <div class="media-body">
+                  
+                  <a href="{% url 'newAppointment' %}" class='btn btn-az-primary'>New Appointment</a>
+                </div><!-- media-body -->
+              </div><!-- media -->
+              <div class="media">
+                <div class="media-body">
+                 <a href="{% url 'inventory' %}" class='btn btn-danger'>Inventory</a>
+                </div><!-- media-body -->
+              </div><!-- media -->
+              <div class="media">
+                <div class="media-body">
+                  <a href="{% url 'diagnoists' %}" class='btn btn-warning'>Diagnosis</a>
+                </div><!-- media-body -->
+              </div><!-- media -->
+             
+            </div>
+        </div><!-- az-dashboard-one-title -->
+
+         
+         <div class="row row-sm mg-b-20">
+            <div class="col-lg-7 ht-lg-100p">
+              <div class="card card-dashboard-one">
+                <div class="card-header">
+                  <div>
+                    <h1>Dashboard</h1>
+                    <p class="card-text">Audience to which the users belonged while on the current date range.</p>
+                  </div>
+                  <div class="btn-group">
+                    <button class="btn active">Today</button>
+                    
+                  </div>
+                </div><!-- card-header -->
+                <div class="card-body">
+                  <div class=" ml-3">
+                    <div>
+                      <label class="mg-b-0">Appointments</label>
+                      <h2>13,956</h2>
+                    </div>
+                    <div>
+                      
+                      <a href="{% url 'appointments' %}">Check Appointments</a>
+                    </div>
+                    
+                  </div><!-- card-body-top -->
+                  <div class="flot-chart-wrapper">
+                    
+                  </div><!-- flot-chart-wrapper -->
+                </div><!-- card-body -->
+              </div><!-- card -->
+            </div><!-- col -->
+            <div class="col-lg-5 mg-t-20 mg-lg-t-0">
+              <div class="row row-sm">
+                <div class="col-sm-6">
+                  <div class="card card-dashboard-two">
+                   
+                    <div class="card-body bg-primary">
+                      <div class="chart-wrapper d-flex flex-column">
+                         <h2 class='ml-4 mt-4 text-white'>Total Doctors:</h6>
+                         <h4  class='ml-4 mt-4 text-white mb-2'>{{total1}}</h4>
+                      </div><!-- chart-wrapper -->
+                    </div><!-- card-body -->
+                  </div><!-- card -->
+                </div><!-- col -->
+                <div class="col-sm-6 mg-t-20 mg-sm-t-0">
+                  <div class="card card-dashboard-two">
+                   <!-- card-header -->
+                    <div class="card-body bg-success">
+                      <div class="chart-wrapper">
+                         <h2 class='ml-4 mt-4 text-white'>Total Paitents:</h6>
+                         <h4  class='ml-4 mt-4 text-white mb-2'>{{total2}}</h4>
+                      </div><!-- chart-wrapper -->
+                    </div><!-- card-body -->
+                  </div><!-- card -->
+                </div><!-- col -->
+                <div class="col-sm-12 mg-t-20">
+                  <div class="card card-dashboard-three bg-danger">
+                    <div class="card-header">
+                      <p class='text-white'>Inventory</p>
+                      <h6 class='text-white'> {{total3}} </h6>
+                      <small class='text-white'>Total No. Of items are adversely depenedent on the availability of items.</small>
+                    </div><!-- card-header -->
+                    <div class="card-body">
+                      <div class="chart"><canvas id="chartBar5"></canvas></div>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- row -->
+            </div><!--col -->
+          </div>
+          <hr>
+       
+          
+         
+{% endblock content %}
+    
+   
+   

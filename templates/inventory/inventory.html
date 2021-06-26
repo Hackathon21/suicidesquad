@@ -1,0 +1,130 @@
+{% extends "basic.html" %}
+
+{% block content %}
+
+        <div class="row row-sm mg-b-20 mg-lg-b-0">
+            <div class="col-lg-5 col-xl-6">
+              <div class="card card-table-one">
+                <h3>Most Selling Drugs</h3>
+                <p class="az-content-text mg-b-20">Meds With Most Bills</p>
+                <div class="table-responsive">
+                  <div class="card-body row">
+                  <div class="col-md-12 d-flex align-items-center">
+                    <div class="chart"><canvas id="diagnosisChart1" style="width:150%;"></canvas></div>
+                  </div><!-- col -->
+                  <!-- col -->
+                </div>
+                </div><!-- table-responsive -->
+              </div><!-- card -->
+            </div><!-- col-lg-3 -->
+            <div class="col-lg-7 col-xl-6 mg-t-20 mg-lg-t-0">
+                <div class="row row-sm">
+                <div class="col-md-6 col-lg-12 mg-b-20 mg-md-b-0 mg-lg-b-20">
+                  <div class="card card-dashboard-five">
+                    <div class="card-header">
+                      <h3>Quick Links</h3>
+                      <span class="card-text">Idhar ke liye koi subtitile do</span>
+                    </div><!-- card-header -->
+                    <div class="card-body row row-sm d-flex flex-column justify-content-around">
+                      <div class="col-12">
+                        
+                        <div>
+                          <a href="{% url 'inventoryUser' %}" class='btn btn-lg btn-block btn-az-primary'>New Bill </a>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        
+                        <div class='mt-5'>
+                          <a href="{% url 'newDiagnosis' %}" class='btn btn-lg btn-block btn-danger'>New Drug </a>
+                        </div>
+                      </div><!-- col -->
+                    </div><!-- card-body -->
+                  </div><!-- card-dashboard-five -->
+                </div><!-- col -->
+                <!-- col -->
+              </div>
+            </div><!-- col-lg -->
+
+        </div>
+        <script>
+            var ctx = document.getElementById('diagnosisChart1').getContext('2d');
+            let colorHexx = []
+                let max = 12
+            
+                for(i=0; i< max; i++ ) {
+                    var randomColor = Math.floor(Math.random()*16777215).toString(16);
+                    colorHexx.push('#' +randomColor)
+                }
+                var chart = new Chart(ctx, {
+                    // The type of chart we want to create
+                    type: 'bar',
+
+                    // The data for our dataset
+                    data: {
+                        labels: ['first' , 'second','3','4','5','6','7'],
+                        datasets: [{
+                            label: 'Bills',
+                            fill: false,
+                            lineTension: 1,
+                            borderCapStyle: 'butt',
+                            backgroundColor: colorHexx,
+                            borderColor: 'white',
+                            data: ['1' ,'2','3','4','5','6','7']
+                        }]
+                    },
+
+                    // Configuration options go here
+                    options: {
+                         scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+        </script>
+        <div class="container-fluid my-5" style="border-top:1px solid #A5A8AC;">
+            
+        </div>
+        <div class="col-lg-12 col-xl-12 mg-t-20 mg-lg-t-0">
+              <div class="card card-table-one">
+                <div class="d-flex justify-content-between">
+                    <h3 >Drugs List</h3>
+                    <a href="" class='btn btn-sm btn-az-primary'>All Drugs </a>
+                </div> 
+                <p class="az-content-text mg-b-20">Part of this date range occurs before the new users metric had been calculated, so the old users metric is displayed.</p>
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                    <tr>
+                    <th><h4 class='text-dark mt-1'>ID</h4></th>
+                    <th><h4 class='text-dark mt-1'>Name</h4></th>
+                    <th><h4 class='text-dark mt-1'>Buy Price</h4></th>
+                    <th><h4 class='text-dark mt-1'>Selling Price</h4></th>
+                    <th><h4 class='text-dark mt-1'>Margin</h4></th>
+                    <th><h4 class='text-dark mt-1'>Update</h4></th>
+                    
+                    </tr>
+                </thead>
+                <tbody>
+                 {% for i in meds %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td class=' mt-1'>{{i.item}}</td>
+                        <td class=' mt-1'>₹{{i.b_price}}/-</td>
+                        <td class=' mt-1'>₹{{i.s_price}}/-</td>
+                        <td class=' mt-1'> ₹{{i.get_margin}}/-</td>
+                        <td class=' mt-1 d-flex justify-content-center'>
+                            <a href="" class='btn btn-sm btn-az-primary'>Update <a href="" class='nav-link'>+</a></a>
+                        </td>
+                        
+                    </tr>
+                {% endfor %}
+                </tbody>
+                  </table>
+                </div><!-- table-responsive -->
+              </div><!-- card -->
+            </div>
+{% endblock content %}

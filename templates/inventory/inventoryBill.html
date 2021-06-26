@@ -1,0 +1,34 @@
+{% extends "basic.html" %}
+
+{% block content %}
+<div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                    <tr>
+                    <th><h4 class='text-dark mt-1'>ID</h4></th>
+                    <th><h4 class='text-dark mt-1'>Name</h4></th>
+                    <th><h4 class='text-dark mt-1'>Buy Price</h4></th>
+                    <th><h4 class='text-dark mt-1'>Selling Price</h4></th>
+                    <th><h4 class='text-dark mt-1'>Margin</h4></th>
+                    <th><h4 class='text-dark mt-1'>Update</h4></th>
+                    
+                    </tr>
+                </thead>
+                <tbody>
+                 {% for i in meds %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td class=' mt-1'>{{i.item}}</td>
+                        <td class=' mt-1'>₹{{i.b_price}}/-</td>
+                        <td class=' mt-1'>₹{{i.s_price}}/-</td>
+                        <td class=' mt-1'> ₹{{i.get_margin}}/-</td>
+                        <td class=' mt-1 d-flex justify-content-center'>
+                            <a href="" class='btn btn-sm btn-az-primary'>Add To Cart <a href="{% url 'inventoryBill2' user.id i.id %}" class='nav-link'>+</a></a>
+                        </td>
+                        
+                    </tr>
+                {% endfor %}
+                </tbody>
+                  </table>
+                </div><!-- table-responsive -->
+{% endblock content %}

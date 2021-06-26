@@ -1,0 +1,101 @@
+{% extends "basic.html" %}
+
+{% block content %}
+        <div class="row row-sm mg-b-20 d-flex justify-content-center my-5">
+            <div class="col-lg-7 ht-lg-100p">
+              <div class="card card-dashboard-one">
+                <div class="card-header">
+                  <div>
+                    <h2 class="">Create New Item</h2>
+                    <p class="card-text">Cause all great pharmacy needs store management.</p>
+                  </div>
+                  
+                </div><!-- card-header -->
+                <div class="card-body px-3">
+                    <form  method="post" action="{% url 'newItem' %}"> {% csrf_token %}
+                        <div class="form-group">
+                            <div class="row">
+                                <div class=" col-sm-12">
+                                        <label>Item Name</label>
+                                         <input type="text" class="form-control" name='name'  placeholder="Enter Item Name" >
+                       
+                                </div>
+                                
+                            </div>
+                        </div><!-- form-group -->
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                        <label>Buying Price</label>
+                                         <input type="text" class="form-control" name='b_price'  placeholder="Enter Buying Price" >
+                       
+                                </div>
+                                <div class=" col-md-6 col-sm-12">
+                                        <label>Selling Price</label>
+                                         <input type="text" class="form-control" name='s_price'  placeholder="Enter Selling Price" >
+                       
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            Qty:
+                                        </div>
+                                        </div>
+                                        <input id="dateMask" type="text" name='qty' class="form-control" >
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <!-- form-group -->
+                        <button class="btn btn-danger btn-block" type="submit">Create New Item</button>
+                    </form>
+                  
+                  <!-- flot-chart-wrapper -->
+                </div><!-- card-body -->
+              </div><!-- card -->
+            </div><!-- col -->
+            <!--col -->
+        </div>
+        <hr>
+        <div class="container">
+            <h2 class="">All Previous Items</h2>
+        </div>
+            <div class="table-responsive">
+                <table class="table table-hover table-dark mg-b-0">
+                <thead>
+                    <tr>
+                    <th><h4 class='text-light mt-1'>ID</h4></th>
+                    <th><h4 class='text-light mt-1'>Name</h4></th>
+                    <th><h4 class='text-light mt-1'>Buy Price</h4></th>
+                    <th><h4 class='text-light mt-1'>Selling Price</h4></th>
+                    <th><h4 class='text-light mt-1'>Margin</h4></th>
+                    <th><h4 class='text-light mt-1'>Update</h4></th>
+                    <th><h4 class='text-light mt-1'>Delete</h4></th>
+                    </tr>
+                </thead>
+                <tbody>
+                 {% for i in items %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td class='text-light mt-1'>{{i.item}}</td>
+                        <td class='text-light mt-1'>₹{{i.b_price}}/-</td>
+                        <td class='text-light mt-1'>₹{{i.s_price}}/-</td>
+                        <td class='text-light mt-1'> ₹{{i.get_margin}}/-</td>
+                        <td class='text-light mt-1'>
+                            <a href="" class='btn btn-sm btn-az-primary'>Update </a>
+                        </td>
+                        <td class='text-light mt-1'><a href="" class='btn btn-sm btn-danger'>Delete </a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                </table>
+            </div>
+        
+{% endblock content %}

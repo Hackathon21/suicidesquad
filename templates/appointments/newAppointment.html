@@ -1,0 +1,108 @@
+{% extends "basic.html" %}
+
+{% block content %}
+        <div class="row row-sm mg-b-20 d-flex justify-content-center my-5">
+            <div class="col-lg-7 ht-lg-100p">
+              <div class="card card-dashboard-one">
+                <div class="card-header">
+                  <div>
+                    <h2 class="">Create New Appointment</h2>
+                    <p class="card-text">Audience to which the users belonged while on the current date range.</p>
+                  </div>
+                  
+                </div><!-- card-header -->
+                <div class="card-body px-3">
+                    <form  method="post" action="{% url 'newAppointment' %}"> {% csrf_token %}
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                        <label>Name</label>
+                                         <input type="text" class="form-control" name='name'  placeholder="Enter paitent's Name" >
+                       
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                        <label>Phone</label>
+                                         <input type="number" class="form-control" name='phone'  placeholder="Enter Paitent's Phone No." >
+                       
+                                </div>
+                            </div>
+                        </div><!-- form-group -->
+                        <div class="form-group">
+                            <select class="form-control form-control-lg mb-3" name='doctor'  aria-label=".form-select-lg example">
+                                <option selected>Select Doctor</option>
+                                {% for i in docs  %}
+                                 <option value="{{i.user.username}}">{{i.user.username}}</option>
+                                {% endfor %}
+                                </select>
+
+                                
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            Date:
+                                        </div>
+                                        </div>
+                                        <input id="dateMask" type="date" name='date' class="form-control" placeholder="DD/MM/YYYY">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12">
+                                     
+                                        <input type="time" class="form-control" name='time'  placeholder="Enter Paitent's Phone No." >
+                       
+                                </div>
+                            </div>
+                        </div>
+                        <!-- form-group -->
+                        <button class="btn btn-az-primary btn-block" type="submit">Create New Appointment</button>
+                    </form>
+                  
+                  <!-- flot-chart-wrapper -->
+                </div><!-- card-body -->
+              </div><!-- card -->
+            </div><!-- col -->
+            <!--col -->
+        </div>
+        <hr>
+        <div class="container">
+            <h2 class="">All Previous Appointments</h2>
+        </div>
+            <div class="table-responsive">
+                <table class="table table-hover table-dark mg-b-0">
+                <thead>
+                    <tr>
+                    <th><h4 class='text-light mt-1'>ID</h4></th>
+                    <th><h4 class='text-light mt-1'>Name</h4></th>
+                    <th><h4 class='text-light mt-1'>Doctor</h4></th>
+                    <th><h4 class='text-light mt-1'>Time</h4></th>
+                    <th><h4 class='text-light mt-1'>Action</h4></th>
+                    <th>*</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for i in appointment %}
+                    <tr>
+                        <th scope="row">1</th>
+                        <td class='text-light mt-1'>{{i.pai.name}}</td>
+                        <td class='text-light mt-1'>{{i.doc.name}}</td>
+                        <td class='text-light mt-1'> {{i.date}} {{i.time}}</td>
+                        <td class='text-light mt-1'>
+                            <div class="row ">
+                                <div class="col-sm-12 col-md-6 ">
+                                    <a href="" class='btn btn-sm btn-az-primary'>Bill </a>
+                                </div>
+                                
+                            </div>
+                        </td>
+                        <td class='text-light mt-1'> X</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                </table>
+            </div>
+        
+{% endblock content %}
